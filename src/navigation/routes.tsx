@@ -1,4 +1,4 @@
-import { Route } from "./types";
+import { Route } from './types';
 import {
   Atbash,
   Caesar,
@@ -9,60 +9,67 @@ import {
   Vernam,
   Game,
   Info,
-} from "../screens";
+  Home,
+} from '../screens';
 
 const routes: Route[] = [
   {
-    title: "home",
-    path: "/",
+    title: 'home',
+    path: '/',
     exact: true,
+    componnent: Home,
+  },
+  {
+    title: 'timeline',
+    path: '/timeline',
+    exact: false,
     componnent: Game,
   },
   {
-    title: "information",
-    path: "/information",
+    title: 'information',
+    path: '/information',
     exact: false,
     componnent: Info,
   },
   {
-    title: "atbash",
-    path: "/atbash",
+    title: 'atbash',
+    path: '/atbash',
     exact: false,
     componnent: Atbash,
   },
   {
-    title: "scytale",
-    path: "/scytale",
+    title: 'scytale',
+    path: '/scytale',
     exact: false,
     componnent: Scytale,
   },
   {
-    title: "caesar",
-    path: "/caesar",
+    title: 'caesar',
+    path: '/caesar',
     exact: false,
     componnent: Caesar,
   },
   {
-    title: "vigenere",
-    path: "/vigenere",
+    title: 'vigenere',
+    path: '/vigenere',
     exact: false,
     componnent: Vigenere,
   },
   {
-    title: "jefferson",
-    path: "/jefferson",
+    title: 'jefferson',
+    path: '/jefferson',
     exact: false,
     componnent: Jefferson,
   },
   {
-    title: "charlesBabbage",
-    path: "/charlesBabbage",
+    title: 'charlesBabbage',
+    path: '/charlesBabbage',
     exact: false,
     componnent: CharlesBabbage,
   },
   {
-    title: "vernam",
-    path: "/vernam",
+    title: 'vernam',
+    path: '/vernam',
     exact: false,
     componnent: Vernam,
   },

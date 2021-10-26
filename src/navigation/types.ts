@@ -1,4 +1,14 @@
-type Path = "/" | "/information" | '/atbash' | '/scytale' | "/caesar" | '/vigenere' | '/jefferson' | '/charlesBabbage' | '/vernam' ;
+type Path =
+  | '/'
+  | '/timeline'
+  | '/information'
+  | '/atbash'
+  | '/scytale'
+  | '/caesar'
+  | '/vigenere'
+  | '/jefferson'
+  | '/charlesBabbage'
+  | '/vernam';
 
 type Route = {
   title: string;
