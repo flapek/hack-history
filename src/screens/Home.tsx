@@ -1,11 +1,17 @@
-import { Grid, Paper, Typography, FormGroup, FormControl, TextField } from '@mui/material';
+import { Grid, Paper, Typography, FormGroup, FormControl, TextField, Button } from '@mui/material';
 import { SxProps } from '@mui/system';
+import { useHistory } from 'react-router-dom';
 
 const paperPadding: SxProps = {
   padding: '20px 50px 20px 50px',
 };
 
 export default function Home() {
+  let history = useHistory();
+
+  const redirect = () => {
+    history.push('timeline');
+  };
   return (
     <Grid container rowSpacing={5} justifyContent="center">
       <Grid item xs={10} md={8} lg={8}>
@@ -34,6 +40,9 @@ export default function Home() {
                 variant="standard"
               />
             </FormControl>
+            <Button variant="contained" onClick={redirect}>
+              Play
+            </Button>
           </FormGroup>
         </Paper>
       </Grid>
