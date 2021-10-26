@@ -1,3 +1,5 @@
+import { BaseGameScreen } from '../shared/components';
+
 export default function Caesar() {
-  return <div>Info</div>;
+  return <BaseGameScreen>Info</BaseGameScreen>;
 }

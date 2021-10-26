@@ -1,3 +1,5 @@
+import { BaseGameScreen } from '../shared/components';
+
 export default function Vernam() {
-  return <div>Vernam cipher</div>;
+  return <BaseGameScreen>Vernam cipher</BaseGameScreen>;
 }

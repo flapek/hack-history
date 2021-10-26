@@ -1,3 +1,5 @@
+import { BaseGameScreen } from '../shared/components';
+
 export default function Info() {
-  return <div>Info</div>;
+  return <BaseGameScreen>Info</BaseGameScreen>;
 }

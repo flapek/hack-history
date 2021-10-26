@@ -1,4 +1,5 @@
+import { BaseGameScreen } from '../shared/components';
+
 export default function Scytale() {
-    return <div>Scytale</div>;
-  }
-  
+  return <BaseGameScreen>Scytale</BaseGameScreen>;
+}

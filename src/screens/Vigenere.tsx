@@ -1,4 +1,5 @@
+import { BaseGameScreen } from '../shared/components';
+
 export default function Vigenere() {
-    return <div>Vigenère</div>;
-  }
-  
+  return <BaseGameScreen>Vigenère</BaseGameScreen>;
+}

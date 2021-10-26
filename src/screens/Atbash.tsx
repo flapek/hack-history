@@ -1,3 +1,5 @@
+import { BaseGameScreen } from '../shared/components';
+
 export default function Atbash() {
-  return <div>Atbash</div>;
+  return <BaseGameScreen>Atbash</BaseGameScreen>;
 }

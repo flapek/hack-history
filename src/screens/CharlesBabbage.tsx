@@ -1,3 +1,5 @@
+import { BaseGameScreen } from '../shared/components';
+
 export default function CharlesBabbage() {
-  return <div>Charles Babbage</div>;
+  return <BaseGameScreen>Charles Babbage</BaseGameScreen>;
 }
