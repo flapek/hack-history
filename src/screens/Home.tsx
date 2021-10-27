@@ -1,17 +1,28 @@
 import { Grid, Paper, Typography, FormGroup, FormControl, TextField, Button } from '@mui/material';
 import { SxProps } from '@mui/system';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useAppDispatch } from '../app';
+import { rename } from '../features/user/userSlice';
 
 const paperPadding: SxProps = {
   padding: '20px 50px 20px 50px',
 };
 
 export default function Home() {
-  let history = useHistory();
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+  const [username, setUsername] = useState('');
 
-  const redirect = () => {
+  function redirect() {
+    dispatch(rename(username));
     history.push('timeline');
-  };
+  }
+
+  function onChange(e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    setUsername(e.currentTarget.value);
+  }
+
   return (
     <Grid container rowSpacing={5} justifyContent="center">
       <Grid item xs={10} md={8} lg={8}>
@@ -38,6 +49,7 @@ export default function Home() {
                 label="Username"
                 helperText="This is your username using during the game"
                 variant="standard"
+                onChange={onChange}
               />
             </FormControl>
             <Button variant="contained" onClick={redirect}>
