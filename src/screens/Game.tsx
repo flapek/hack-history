@@ -34,12 +34,9 @@ export default function Game() {
   return (
     <Box>
       <Container disableGutters fixed>
-        <GameTimeline></GameTimeline>
+        <GameTimeline />
       </Container>
-      <DialogUser
-        open={openDialog}
-        setOpen={handleOpenDialog}
-      />
+      <DialogUser open={openDialog} setOpen={handleOpenDialog} />
       <SpeedDial
         ariaLabel="Game information and options"
         sx={{ position: 'fixed', bottom: 16, right: 16 }}
