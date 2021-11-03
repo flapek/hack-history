@@ -1,5 +1,12 @@
-import { createTheme } from '@mui/material';
+import { createTheme, Theme } from '@mui/material';
 
-const customTheme = createTheme({});
+const appTheme: Theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
+      contrastText: 'white',
+    },
+  },
+});
 
-export default customTheme;
+export default appTheme;

@@ -1,3 +1,4 @@
 import appTheme from './appTheme';
+import styled from './styled';
 
-export { appTheme };
+export { appTheme, styled };

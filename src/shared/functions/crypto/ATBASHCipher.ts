@@ -22,3 +22,4 @@ function createAlphabet(): {} {
   }
   return alphabet;
 }
+

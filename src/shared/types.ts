@@ -1,12 +1,13 @@
 type Color =
-  | "inherit"
-  | "grey"
-  | "primary"
-  | "secondary"
-  | "error"
-  | "info"
-  | "success"
-  | "warning";
+  | 'inherit'
+  | 'grey'
+  | 'primary'
+  | 'secondary'
+  | 'error'
+  | 'info'
+  | 'success'
+  | 'warning';
 
-export type { Color };
+type Cipher = 'ATBASH';
 
+export type { Color, Cipher };
