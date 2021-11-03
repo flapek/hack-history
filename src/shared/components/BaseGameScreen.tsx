@@ -1,54 +1,95 @@
-import { Container, Fab, Zoom } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { SxProps } from '@mui/system';
-import { green } from '@mui/material/colors';
+import {
+  IconButton,
+  Container,
+  Divider,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+  Grid,
+} from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
 import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Drawer from '@mui/material/Drawer';
+import CloseIcon from '@mui/icons-material/Close';
 
-const fabStyle: SxProps = {
-  position: 'absolute',
-  bottom: 16,
-  right: 16,
-  color: 'white',
-  bgcolor: green[500],
-  '&:hover': {
-    bgcolor: green[600],
-  },
-};
+const drawerWidth = 240;
 
 export default function BaseGameScreen({ children }: { children: React.ReactNode }) {
-  const theme = useTheme();
   let history = useHistory();
+  const [open, setOpen] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const handleOpen = () => setOpen(!open);
+
+  const handleDrawerOpen = () => {
+    setOpenDrawer(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpenDrawer(false);
+  };
 
   const redirect = () => {
     history.goBack();
   };
 
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  };
+  const actions = [
+    {
+      icon: <ArrowBackIosNewSharpIcon />,
+      name: 'Back',
+      onClick: () => {
+        redirect();
+      },
+    },
+    {
+      icon: <InfoIcon />,
+      name: 'About',
+      onClick: () => {
+        handleDrawerOpen();
+      },
+    },
+  ];
 
   return (
     <Container maxWidth={false}>
       {children}
-      <Zoom
-        in
-        timeout={transitionDuration}
-        style={{
-          transitionDelay: `${transitionDuration.exit}ms`,
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
         }}
-        unmountOnExit>
-        <Fab
-          sx={fabStyle}
-          aria-label="back"
-          color="secondary"
-          component="button"
-          onClick={redirect}>
-          <ArrowBackIosNewSharpIcon />
-        </Fab>
-      </Zoom>
+        variant="persistent"
+        anchor="left"
+        open={openDrawer}>
+        <Grid>
+          <IconButton onClick={handleDrawerClose}>
+            <CloseIcon />
+          </IconButton>
+        </Grid>
+        <Divider />
+      </Drawer>
+      <SpeedDial
+        ariaLabel="Game helper"
+        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        icon={<SpeedDialIcon />}
+        onClose={handleOpen}
+        onOpen={handleOpen}
+        open={open}>
+        {actions.map((action) => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+            onClick={action.onClick}
+          />
+        ))}
+      </SpeedDial>
     </Container>
   );
 }

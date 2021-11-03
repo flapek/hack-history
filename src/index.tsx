@@ -4,11 +4,15 @@ import reportWebVitals from './reportWebVitals';
 import Navigation from './navigation/Navigation';
 import { store } from './app';
 import { Provider } from 'react-redux';
+import { appTheme } from './theme';
+import { ThemeProvider } from '@mui/system';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Navigation />
+      <ThemeProvider theme={appTheme}>
+        <Navigation />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

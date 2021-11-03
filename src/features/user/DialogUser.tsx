@@ -7,22 +7,20 @@ import {
   TextField,
 } from '@mui/material';
 import { useState } from 'react';
-import { useAppSelector } from '../../app';
-import { getUsername } from './userSlice';
+import { useAppDispatch, useAppSelector } from '../../app';
+import { getUsername, rename } from './userSlice';
 
-export default function DialogUser({
-  open,
-  setOpen,
-  rename,
-}: {
-  open: boolean;
-  setOpen: () => void;
-  rename: () => void;
-}) {
-  const [username, setUsername] = useState(useAppSelector(getUsername));
+export default function DialogUser({ open, setOpen }: { open: boolean; setOpen: () => void }) {
+  const dispatch = useAppDispatch();
+  const actualUsername = useAppSelector(getUsername);
+  const [username, setUsername] = useState(actualUsername);
 
   function onChange(e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setUsername(e.currentTarget.value);
+  }
+
+  function confirm() {
+    dispatch(rename(username));
   }
 
   return (
@@ -43,7 +41,7 @@ export default function DialogUser({
       </DialogContent>
       <DialogActions>
         <Button onClick={setOpen}>Cancel</Button>
-        <Button onClick={rename}>Confirm</Button>
+        <Button onClick={confirm}>Confirm</Button>
       </DialogActions>
     </Dialog>
   );

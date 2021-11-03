@@ -39,10 +39,9 @@ export default function Game() {
       <DialogUser
         open={openDialog}
         setOpen={handleOpenDialog}
-        rename={() => console.log('Rename')}
       />
       <SpeedDial
-        ariaLabel="SpeedDial tooltip example"
+        ariaLabel="Game information and options"
         sx={{ position: 'fixed', bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}
         onClose={handleOpen}
