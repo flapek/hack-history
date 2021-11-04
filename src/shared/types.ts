@@ -10,4 +10,13 @@ type Color =
 
 type Cipher = 'ATBASH';
 
-export type { Color, Cipher };
+interface Translation {
+  readonly history: string;
+  readonly hints: string[];
+}
+
+interface Hint {
+  description: string;
+}
+
+export type { Color, Cipher, Translation, Hint };

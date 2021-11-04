@@ -1,9 +1,10 @@
 import { Grid, Paper, Typography } from '@mui/material';
 import { BaseGameScreen } from '../shared/components';
-import { encryptAndDecrypt } from '../shared/functions';
 import { useAppSelector } from '../app';
 import { getUsername } from '../features/user/userSlice';
 import { styled } from '../theme';
+import { Cipher } from '../shared/functions';
+import { HintPanel, translation } from '../features/atbash';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -14,13 +15,13 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Atbash() {
   let username = useAppSelector(getUsername);
-  let decryptedUsername = username.encrypt('ATBASH');
+  let decryptedUsername = Cipher.encrypt('ATBASH', username);
 
   return (
     <BaseGameScreen>
       <Grid container spacing={2}>
         <Grid item xs={8}>
-          <Item>{encryptAndDecrypt('xs=8')}</Item>
+          <Item>'xs=8'</Item>
         </Grid>
         <Grid item xs={4}>
           <Item>xs=4</Item>
@@ -32,6 +33,7 @@ export default function Atbash() {
           <Typography>{decryptedUsername}</Typography>
         </Grid>
       </Grid>
+      <HintPanel open={true} hints={translation.hints} />
     </BaseGameScreen>
   );
 }

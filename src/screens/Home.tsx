@@ -24,23 +24,28 @@ export default function Home() {
   }
 
   return (
-    <Grid container rowSpacing={5} justifyContent="center">
+    <Grid
+      container
+      sx={{ display: 'flex', alignItems: 'center' }}
+      rowSpacing={5}
+      justifyContent="center">
       <Grid item xs={10} md={8} lg={8}>
         <Paper elevation={15} sx={paperPadding}>
           <Typography align="center" gutterBottom variant="h4">
             History of cryptography
           </Typography>
           <Typography align="center" gutterBottom variant="body1">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores sapiente doloribus
-            quae voluptatibus sed autem, dolore quas aut, nobis provident laudantium voluptas, esse
-            optio facilis at impedit unde? Maiores, corrupti.
+            A simple game showing how ciphers have changed over the years.
           </Typography>
         </Paper>
       </Grid>
       <Grid item xs={8} lg={6}>
         <Paper elevation={15} sx={paperPadding}>
-          <Typography align="center" gutterBottom variant="h4">
-            History of cryptography
+          <Typography align="center" gutterBottom variant="h5">
+            Enter your username using alphabeth below:
+          </Typography>
+          <Typography align="center" variant="h6">
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ
           </Typography>
           <FormGroup>
             <FormControl>
