@@ -1,38 +1,37 @@
-import {
-  IconButton,
-  Container,
-  Divider,
-  SpeedDial,
-  SpeedDialAction,
-  SpeedDialIcon,
-  Grid,
-} from '@mui/material';
+import { Container, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Drawer from '@mui/material/Drawer';
-import CloseIcon from '@mui/icons-material/Close';
+import { HintPanel, HistoryPanel } from '.';
 
-const drawerWidth = 240;
-
-export default function BaseGameScreen({ children }: { children: React.ReactNode }) {
-  let history = useHistory();
+export default function BaseGameScreen({
+  hints = [],
+  history,
+  children,
+}: {
+  hints?: string[];
+  history?: string;
+  children: React.ReactNode;
+}) {
+  let browserHistory = useHistory();
   const [open, setOpen] = useState(false);
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const [openHintPanel, setOpenHintPanel] = useState(false);
+  const [openHistoryPanel, setOpenHistoryPanel] = useState(false);
 
   const handleOpen = () => setOpen(!open);
 
-  const handleDrawerOpen = () => {
-    setOpenDrawer(true);
+  const handleHintPanel = () => {
+    setOpenHintPanel(!openHintPanel);
   };
 
-  const handleDrawerClose = () => {
-    setOpenDrawer(false);
+  const handleHistoryPanel = () => {
+    setOpenHistoryPanel(!openHistoryPanel);
   };
 
   const redirect = () => {
-    history.goBack();
+    browserHistory.goBack();
   };
 
   const actions = [
@@ -47,7 +46,14 @@ export default function BaseGameScreen({ children }: { children: React.ReactNode
       icon: <InfoIcon />,
       name: 'About',
       onClick: () => {
-        handleDrawerOpen();
+        handleHintPanel();
+      },
+    },
+    {
+      icon: <HistoryEduIcon />,
+      name: 'History',
+      onClick: () => {
+        handleHistoryPanel();
       },
     },
   ];
@@ -55,25 +61,6 @@ export default function BaseGameScreen({ children }: { children: React.ReactNode
   return (
     <Container maxWidth={false}>
       {children}
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={openDrawer}>
-        <Grid>
-          <IconButton onClick={handleDrawerClose}>
-            <CloseIcon />
-          </IconButton>
-        </Grid>
-        <Divider />
-      </Drawer>
       <SpeedDial
         ariaLabel="Game helper"
         sx={{ position: 'fixed', bottom: 16, right: 16 }}
@@ -90,6 +77,12 @@ export default function BaseGameScreen({ children }: { children: React.ReactNode
           />
         ))}
       </SpeedDial>
+      <HistoryPanel
+        open={openHistoryPanel}
+        history={history ?? ''}
+        handleClose={handleHistoryPanel}
+      />
+      <HintPanel open={openHintPanel} hints={hints} handleClose={handleHintPanel} />
     </Container>
   );
 }

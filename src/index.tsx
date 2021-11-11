@@ -6,12 +6,15 @@ import { store } from './app';
 import { Provider } from 'react-redux';
 import { appTheme } from './theme';
 import { ThemeProvider } from '@mui/system';
+import { SnackbarProvider } from 'notistack';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={appTheme}>
-        <Navigation />
+        <SnackbarProvider maxSnack={3}>
+          <Navigation />
+        </SnackbarProvider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
