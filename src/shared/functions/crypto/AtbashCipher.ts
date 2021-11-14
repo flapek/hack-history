@@ -1,4 +1,4 @@
-export default function encryptAndDecrypt(input: string): string {
+export default function encryptAndDecryptAtbash(input: string): string {
   let output = '';
   let alphabet = createAlphabet();
   for (let char of input) {
@@ -22,4 +22,3 @@ function createAlphabet(): {} {
   }
   return alphabet;
 }
-

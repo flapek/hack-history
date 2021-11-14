@@ -5,13 +5,14 @@ import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { HintPanel, HistoryPanel } from '.';
+import { Hint } from '../types';
 
 export default function BaseGameScreen({
   hints = [],
-  history,
+  history = '',
   children,
 }: {
-  hints?: string[];
+  hints?: Hint[];
   history?: string;
   children: React.ReactNode;
 }) {
@@ -44,7 +45,7 @@ export default function BaseGameScreen({
     },
     {
       icon: <InfoIcon />,
-      name: 'About',
+      name: 'Tips',
       onClick: () => {
         handleHintPanel();
       },
@@ -77,11 +78,7 @@ export default function BaseGameScreen({
           />
         ))}
       </SpeedDial>
-      <HistoryPanel
-        open={openHistoryPanel}
-        history={history ?? ''}
-        handleClose={handleHistoryPanel}
-      />
+      <HistoryPanel open={openHistoryPanel} history={history} handleClose={handleHistoryPanel} />
       <HintPanel open={openHintPanel} hints={hints} handleClose={handleHintPanel} />
     </Container>
   );

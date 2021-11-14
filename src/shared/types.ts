@@ -8,11 +8,10 @@ type Color =
   | 'success'
   | 'warning';
 
-type Cipher = 'ATBASH';
+type Cipher = 'ATBASH' | 'SCYTALE' | 'CEASAR' | 'VIGENERE' | 'JEFFERSON' | 'VERNAM';
 
 interface Translation {
   readonly history: string;
-  readonly hints: string[];
 }
 
 interface Hint {

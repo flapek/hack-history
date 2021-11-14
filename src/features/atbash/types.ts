@@ -1,5 +1,5 @@
 import { Hint } from '../../shared/types';
 
-type AtbashState = { hints: Set<Hint>; showedHints: Set<Hint> };
+type AtbashState = { hints: Hint[] };
 
 export type { AtbashState };

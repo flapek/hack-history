@@ -2,8 +2,8 @@ import { Grid, Paper, Typography, FormGroup, FormControl, TextField, Button } fr
 import { SxProps } from '@mui/system';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAppDispatch } from '../app';
-import { rename } from '../features/user/userSlice';
+import { useAppDispatch, useAppSelector } from '../app';
+import { getUsername, rename } from '../features/user/userSlice';
 
 const paperPadding: SxProps = {
   padding: '20px 50px 20px 50px',
@@ -12,7 +12,7 @@ const paperPadding: SxProps = {
 export default function Home() {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(useAppSelector(getUsername));
 
   function redirect() {
     dispatch(rename(username));
@@ -54,6 +54,7 @@ export default function Home() {
                 label="Username"
                 helperText="This is your username using during the game"
                 variant="standard"
+                value={username}
                 onChange={onChange}
               />
             </FormControl>

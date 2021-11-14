@@ -62,12 +62,6 @@ const routes: Route[] = [
     componnent: Jefferson,
   },
   {
-    title: 'charlesBabbage',
-    path: '/charlesBabbage',
-    exact: false,
-    componnent: CharlesBabbage,
-  },
-  {
     title: 'vernam',
     path: '/vernam',
     exact: false,
