@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/types';
 import { Hint } from '../../shared/types';
-import { ScytaleState } from './types';
+import { VernamState } from './types';
 
-const initialState: ScytaleState = {
+const initialState: VernamState = {
   hints: [
     { description: 'Used alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ.' },
     {
@@ -17,14 +17,14 @@ const initialState: ScytaleState = {
   ],
 };
 
-export const scytaleSlice = createSlice({
-  name: 'scytale',
+export const vernamSlice = createSlice({
+  name: 'vernam',
   initialState,
   reducers: {},
 });
 
-export const getHints = (state: RootState): Hint[] => state.scytale.hints;
+export const getHints = (state: RootState): Hint[] => state.vernam.hints;
 
 // export const {} = scytaleSlice.actions;
 
-export default scytaleSlice.reducer;
+export default vernamSlice.reducer;

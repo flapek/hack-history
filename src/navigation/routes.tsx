@@ -1,16 +1,5 @@
 import { Route } from './types';
-import {
-  Atbash,
-  Caesar,
-  CharlesBabbage,
-  Jefferson,
-  Scytale,
-  Vigenere,
-  Vernam,
-  Game,
-  Info,
-  Home,
-} from '../screens';
+import { Atbash, Caesar, Jefferson, Scytale, Vigenere, Vernam, Game, Info, Home } from '../screens';
 
 const routes: Route[] = [
   {
