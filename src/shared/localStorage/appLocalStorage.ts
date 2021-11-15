@@ -1,11 +1,4 @@
-import { appLocalStorageType } from './type';
-
-interface IAppLocalStorage {
-  setItem(type: appLocalStorageType, value: string): void;
-  removeItem(type: appLocalStorageType): void;
-  clear(): void;
-  getItem<T extends string>(type: appLocalStorageType): T;
-}
+import { appLocalStorageType, IAppLocalStorage } from './type';
 
 const appLocalStorage: IAppLocalStorage = {
   setItem: function (type: appLocalStorageType, value: string): void {
