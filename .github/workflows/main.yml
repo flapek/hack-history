@@ -27,6 +27,7 @@ jobs:
           yarn install
           yarn build
   test:
+    needs: build
     runs-on: ubuntu-latest
 
     strategy:
