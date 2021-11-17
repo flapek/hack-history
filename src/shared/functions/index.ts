@@ -3,6 +3,17 @@ import ceasar from './crypto/ceasar';
 import Cipher from './crypto/cipher';
 import scytale from './crypto/scytale';
 import getRandomIntInclusive from './getRandomIntInclusive';
+import lenghtNotEqual from './lenghtNotEqual';
 import randomColor from './randomColor';
+import stringToASCIICode from './stringToASCIICode';
 
-export { randomColor, getRandomIntInclusive, Cipher, atbash, scytale, ceasar };
+export {
+  randomColor,
+  getRandomIntInclusive,
+  Cipher,
+  lenghtNotEqual,
+  stringToASCIICode,
+  atbash,
+  scytale,
+  ceasar,
+};

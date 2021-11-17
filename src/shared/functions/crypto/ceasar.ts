@@ -1,26 +1,26 @@
+import { ALPHABET } from '../../const';
 import { ICipher } from '../../types';
 
-const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 let newalpha = '';
 
-function shift(n) {
-  for (let i = 0; i < alphabet.length; i++) {
-    let offset = (i + n) % alphabet.length;
-    newalpha += alphabet[offset];
+function shift(n: number) {
+  for (let i = 0; i < ALPHABET.length; i++) {
+    let offset = (i + n) % ALPHABET.length;
+    newalpha += ALPHABET[offset];
   }
 }
 
 function encrypt(input: string): string {
   let result = '';
   for (let i = 0; i < input.length; i++) {
-    result += newalpha[alphabet.indexOf(input[i])];
+    result += newalpha[ALPHABET.indexOf(input[i])];
   }
   return result;
 }
 function decrypt(input: string): string {
   let result = '';
   for (let i = 0; i < input.length; i++) {
-    result += alphabet[newalpha.indexOf(input[i])];
+    result += ALPHABET[newalpha.indexOf(input[i])];
   }
   return result;
 }

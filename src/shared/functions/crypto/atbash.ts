@@ -1,28 +1,17 @@
+import { ALPHABET_FIRST_HALf, ALPHABET_SECOND_HALf } from '../../const';
 import { ICipher } from '../../types';
 
 function encryptAndDecrypt(input: string): string {
   let output = '';
-  let alphabet = createAlphabet();
+  const alphabetFirstHalf = ALPHABET_FIRST_HALf.split('');
+  const alphabetSecondHalf = ALPHABET_SECOND_HALf.split('').reverse();
   for (let char of input) {
-    if (char in alphabet) output += alphabet[char];
-    else output += char;
+    if (alphabetFirstHalf.includes(char))
+      output += alphabetSecondHalf[alphabetFirstHalf.indexOf(char)];
+    else output += alphabetFirstHalf[alphabetSecondHalf.indexOf(char)];
   }
 
   return output;
-}
-
-function chr(x: number) {
-  return String.fromCharCode(x);
-}
-
-function createAlphabet(): {} {
-  let alphabet = {};
-
-  for (let i = 0; i < 26; i++) {
-    alphabet[chr(65 + i)] = chr(90 - i);
-    alphabet[chr(97 + i)] = chr(122 - i);
-  }
-  return alphabet;
 }
 
 const atbash: ICipher = {
