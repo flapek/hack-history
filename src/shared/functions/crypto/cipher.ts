@@ -1,15 +1,15 @@
-import { encryptAndDecryptAtbash } from '..';
+import { atbash, ceasar, scytale } from '..';
 import { Cipher as CipherType } from '../../types';
 
 export default class Cipher {
   static encrypt(cipher: CipherType, input: string): string {
     switch (cipher) {
       case 'ATBASH':
-        return encryptAndDecryptAtbash(input);
+        return atbash.encrypt(input);
       case 'SCYTALE':
-        return 'not implemented yet';
+        return scytale.encrypt(input);
       case 'CEASAR':
-        return 'not implemented yet';
+        return ceasar.encrypt(input);
       case 'VIGENERE':
         return 'not implemented yet';
       case 'JEFFERSON':
@@ -24,11 +24,11 @@ export default class Cipher {
   static decrypt(cipher: CipherType, input: string): string {
     switch (cipher) {
       case 'ATBASH':
-        return encryptAndDecryptAtbash(input);
+        return atbash.decrypt(input);
       case 'SCYTALE':
-        return 'not implemented yet';
+        return scytale.decrypt(input);
       case 'CEASAR':
-        return 'not implemented yet';
+        return ceasar.decrypt(input);
       case 'VIGENERE':
         return 'not implemented yet';
       case 'JEFFERSON':

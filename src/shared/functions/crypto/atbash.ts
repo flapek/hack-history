@@ -1,4 +1,6 @@
-export default function encryptAndDecryptAtbash(input: string): string {
+import { ICipher } from '../../types';
+
+function encryptAndDecrypt(input: string): string {
   let output = '';
   let alphabet = createAlphabet();
   for (let char of input) {
@@ -22,3 +24,14 @@ function createAlphabet(): {} {
   }
   return alphabet;
 }
+
+const atbash: ICipher = {
+  encrypt: function (input: string): string {
+    return encryptAndDecrypt(input);
+  },
+  decrypt: function (input: string): string {
+    return encryptAndDecrypt(input);
+  },
+};
+
+export default atbash;

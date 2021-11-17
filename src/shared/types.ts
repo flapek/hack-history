@@ -18,4 +18,9 @@ interface Hint {
   description: string;
 }
 
-export type { Color, Cipher, Translation, Hint };
+interface ICipher {
+  encrypt(input: string): string;
+  decrypt(input: string): string;
+}
+
+export type { Color, Cipher, Translation, Hint, ICipher };
