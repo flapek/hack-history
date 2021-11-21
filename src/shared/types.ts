@@ -30,6 +30,10 @@ type CipherWithKey = BaseCipher & {
   key: string;
 };
 
+type CipherWithKeyAndPassword = CipherWithKey & {
+  password: string;
+};
+
 type CipherWithShift = BaseCipher & {
   shift: number;
 };
@@ -38,6 +42,8 @@ type Cipher<Type> = Type extends CipherType.ATBASH | CipherType.SCYTALE
   ? BaseCipher
   : Type extends CipherType.CEASAR
   ? CipherWithShift
+  : Type extends CipherType.VIGENERE
+  ? CipherWithKeyAndPassword
   : CipherWithKey;
 
 interface ICipher<T extends CipherType> {

@@ -1,90 +1,62 @@
 import { lenghtNotEqual, stringToASCIICode } from '..';
+import { ALPHABET } from '../../const';
 import { Cipher, CipherType, ICipher } from '../../types';
 
 function encrypt(arg: Cipher<CipherType.VIGENERE>): string {
-  // let textList = stringToASCIICode(text);
-  // let keyList = stringToASCIICode(key);
+  let input = stringToASCIICode(arg.input);
+  let password = stringToASCIICode(arg.password);
+  let key = stringToASCIICode(arg.key);
 
-  // if (lenghtNotEqual({ first: textList, second: keyList }))
-  //   keyList = alignmentList(keyList, textList.length);
+  if (lenghtNotEqual({ first: input, second: password }))
+    password = alignmentList(password, input.length);
 
-  // var table = makeTable();
-  // var keyChar = 0;
-  var message: string[] = [];
-  // while (message.length < text.length) {
-  //   for (var i = 0; i < text.length; i++) {
-  //     var row = table[0].indexOf(key[keyChar]);
-  //     var col = table[0].indexOf(text[i]);
-  //     message[message.length] = table[row][col];
-  //     if (keyChar < key.length - 1) {
-  //       keyChar++;
-  //     } else {
-  //       keyChar = 0;
-  //     }
-  //   }
-  // }
-  return intsToCharList(message).join('');
-}
-//miejsce urodzenia, pesel
+  var table = createTable(key);
 
-function alignmentList(keyList: number[], length: number): number[] {
-  const copy = [...keyList];
-  let iterator = 0;
-  do {
-    keyList.push(copy[iterator]);
-    if (++iterator === copy.length) iterator = 0;
-  } while (keyList.length < length);
-
-  return keyList;
+  return intsToCharList(
+    input.map((_, idx) => table[table[0].indexOf(password[idx])][table[0].indexOf(input[idx])]),
+  ).join('');
 }
 
 function decrypt(arg: Cipher<CipherType.VIGENERE>) {
-  // cipher = stringToASCIICode(cipher.value);
-  // key = stringToASCIICode(key.value);
-  // var table = makeTable();
-  // var keyChar = 0;
-  var message: string[] = [];
-  // while (message.length < cipher.length) {
-  //   for (var i = 0; i < cipher.length; i++) {
-  //     var row = table[0].indexOf(key[keyChar]);
-  //     var col = table[row].indexOf(cipher[i]);
-  //     message[message.length] = table[0][col];
-  //     if (keyChar < key.length - 1) {
-  //       keyChar++;
-  //     } else {
-  //       keyChar = 0;
-  //     }
-  //   }
-  // }
-  return intsToCharList(message).join('');
+  let input = stringToASCIICode(arg.input);
+  let password = stringToASCIICode(arg.password);
+  let key = stringToASCIICode(arg.key);
+
+  if (lenghtNotEqual({ first: input, second: password }))
+    password = alignmentList(password, input.length);
+
+  var table = createTable(key);
+  return intsToCharList(
+    input.map((_, idx) => {
+      var row = table[0].indexOf(password[idx]);
+      var col = table[row].indexOf(input[idx]);
+      return table[0][col];
+    }),
+  ).join('');
 }
 
-function makeTable() {
-  var table: number[][] = [];
-  const minASCII = 65;
-  const maxASCII = 91;
-  var i = 0;
-  while (i + minASCII < maxASCII) {
-    var line: number[] = [];
-    for (var j = 0; j < maxASCII - minASCII; j++) {
-      if (j + i + minASCII >= maxASCII) {
-        line[line.length] = j + i - (maxASCII - minASCII) + minASCII;
-      } else {
-        line[line.length] = j + i + minASCII;
-      }
-    }
-    table[table.length] = line;
-    i++;
-  }
-  return table;
+function createTable(key: number[]) {
+  const alphabetASCII = [...new Set([...key, ...stringToASCIICode(ALPHABET)])];
+  return alphabetASCII.map((_, idx) => shift(alphabetASCII, idx));
 }
 
-function intsToCharList(integers) {
-  let ints: string[] = [];
-  for (var i = 0; i < integers.length; i++) {
-    ints[i] = String.fromCharCode(integers[i]);
-  }
-  return ints;
+function alignmentList(keyList: number[], length: number): number[] {
+  const result: number[] = [];
+  let iterator = 0;
+  do {
+    result.push(keyList[iterator]);
+    if (++iterator === keyList.length) iterator = 0;
+  } while (result.length < length);
+
+  return result;
+}
+
+function shift(value: number[], shiftLevel: number) {
+  return value.map((_, idx) => value[(idx + shiftLevel) % value.length]);
+}
+
+function intsToCharList(value: number[]) {
+  return value.map((item) => String.fromCharCode(item));
 }
 
 const vigenere: ICipher<CipherType.VIGENERE> = {
