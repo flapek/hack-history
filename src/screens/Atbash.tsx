@@ -7,14 +7,14 @@ import { translation } from '../features/atbash';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { getHints } from '../features/atbash/atbashSlice';
+import { CipherType } from '../shared/types';
 
 export default function Atbash() {
   let username = useAppSelector(getUsername);
   let hints = useAppSelector(getHints);
   const [input, setInput] = useState('');
   const { enqueueSnackbar } = useSnackbar();
-  // let decryptedUsername = Cipher.encrypt('ATBASH', username);
-  let decryptedUsername = Cipher.encrypt('ATBASH', username);
+  let decryptedUsername = Cipher.encrypt(CipherType.ATBASH, username);
 
   const handleClick = () => {
     input.trim().toLocaleLowerCase() === username

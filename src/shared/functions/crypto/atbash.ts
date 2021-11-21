@@ -1,5 +1,5 @@
 import { ALPHABET_FIRST_HALf, ALPHABET_SECOND_HALf } from '../../const';
-import { ICipher } from '../../types';
+import { Cipher, CipherType, ICipher } from '../../types';
 
 function encryptAndDecrypt(input: string): string {
   let output = '';
@@ -14,12 +14,12 @@ function encryptAndDecrypt(input: string): string {
   return output;
 }
 
-const atbash: ICipher = {
-  encrypt: function (input: string): string {
-    return encryptAndDecrypt(input);
+const atbash: ICipher<CipherType.ATBASH> = {
+  encrypt: function (arg: Cipher<CipherType.ATBASH>): string {
+    return encryptAndDecrypt(arg.input);
   },
-  decrypt: function (input: string): string {
-    return encryptAndDecrypt(input);
+  decrypt: function (arg: Cipher<CipherType.ATBASH>): string {
+    return encryptAndDecrypt(arg.input);
   },
 };
 

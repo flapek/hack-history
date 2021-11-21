@@ -1,7 +1,5 @@
 import { ALPHABET } from '../../const';
-import { ICipher } from '../../types';
-
-let shiftLevel = 10;
+import { Cipher, CipherType, ICipher } from '../../types';
 
 function shift(n: number) {
   return ALPHABET.split('')
@@ -25,12 +23,12 @@ function decrypt(input: string, shiftLevel: number): string {
     .join('');
 }
 
-const ceasar: ICipher = {
-  encrypt: function (input: string): string {
-    return encrypt(input, shiftLevel);
+const ceasar: ICipher<CipherType.CEASAR> = {
+  encrypt: function (arg: Cipher<CipherType.CEASAR>): string {
+    return encrypt(arg.input, arg.shift);
   },
-  decrypt: function (input: string): string {
-    return decrypt(input, shiftLevel);
+  decrypt: function (arg: Cipher<CipherType.CEASAR>): string {
+    return decrypt(arg.input, arg.shift);
   },
 };
 

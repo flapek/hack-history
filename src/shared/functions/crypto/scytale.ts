@@ -1,4 +1,4 @@
-import { ICipher } from '../../types';
+import { Cipher, CipherType, ICipher } from '../../types';
 
 const column = 5;
 
@@ -59,12 +59,12 @@ function splitText(text: string, wordsLenght: number[]) {
   return result;
 }
 
-const scytale: ICipher = {
-  encrypt: function (input: string): string {
-    return encrypt(input);
+const scytale: ICipher<CipherType.SCYTALE> = {
+  encrypt: function (arg: Cipher<CipherType.SCYTALE>): string {
+    return encrypt(arg.input);
   },
-  decrypt: function (input: string): string {
-    return decrypt(input);
+  decrypt: function (arg: Cipher<CipherType.SCYTALE>): string {
+    return decrypt(arg.input);
   },
 };
 

@@ -1,15 +1,15 @@
 import { lenghtNotEqual, stringToASCIICode } from '..';
-import { ICipher } from '../../types';
+import { Cipher, CipherType, ICipher } from '../../types';
 
-function encrypt({ text, key }: { text: string; key: string }): string {
-  let textList = stringToASCIICode(text);
-  let keyList = stringToASCIICode(key);
+function encrypt(arg: Cipher<CipherType.VIGENERE>): string {
+  // let textList = stringToASCIICode(text);
+  // let keyList = stringToASCIICode(key);
 
-  if (lenghtNotEqual({ first: textList, second: keyList }))
-    keyList = alignmentList(keyList, textList.length);
+  // if (lenghtNotEqual({ first: textList, second: keyList }))
+  //   keyList = alignmentList(keyList, textList.length);
 
-  var table = makeTable();
-  var keyChar = 0;
+  // var table = makeTable();
+  // var keyChar = 0;
   var message: string[] = [];
   // while (message.length < text.length) {
   //   for (var i = 0; i < text.length; i++) {
@@ -38,11 +38,11 @@ function alignmentList(keyList: number[], length: number): number[] {
   return keyList;
 }
 
-function decrypt(text, key, cipher) {
-  cipher = stringToASCIICode(cipher.value);
-  key = stringToASCIICode(key.value);
-  var table = makeTable();
-  var keyChar = 0;
+function decrypt(arg: Cipher<CipherType.VIGENERE>) {
+  // cipher = stringToASCIICode(cipher.value);
+  // key = stringToASCIICode(key.value);
+  // var table = makeTable();
+  // var keyChar = 0;
   var message: string[] = [];
   // while (message.length < cipher.length) {
   //   for (var i = 0; i < cipher.length; i++) {
@@ -79,8 +79,6 @@ function makeTable() {
   return table;
 }
 
-
-
 function intsToCharList(integers) {
   let ints: string[] = [];
   for (var i = 0; i < integers.length; i++) {
@@ -89,12 +87,12 @@ function intsToCharList(integers) {
   return ints;
 }
 
-const vigenere: ICipher = {
-  encrypt: function (input: string): string {
-    return encrypt({ text: input, key: '' });
+const vigenere: ICipher<CipherType.VIGENERE> = {
+  encrypt: function (arg: Cipher<CipherType.VIGENERE>): string {
+    return encrypt(arg);
   },
-  decrypt: function (input: string): string {
-    return decrypt(input, '', '');
+  decrypt: function (arg: Cipher<CipherType.VIGENERE>): string {
+    return decrypt(arg);
   },
 };
 

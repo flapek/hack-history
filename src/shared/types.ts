@@ -8,8 +8,14 @@ type Color =
   | 'success'
   | 'warning';
 
-type Cipher = 'ATBASH' | 'SCYTALE' | 'CEASAR' | 'VIGENERE' | 'JEFFERSON' | 'VERNAM';
-
+enum CipherType {
+  ATBASH = 'ATBASH',
+  SCYTALE = 'SCYTALE',
+  CEASAR = 'CEASAR',
+  VIGENERE = 'VIGENERE',
+  JEFFERSON = 'JEFFERSON',
+  VERNAM = 'VERNAM',
+}
 interface Translation {
   readonly history: string;
 }
@@ -18,9 +24,35 @@ interface Hint {
   description: string;
 }
 
-interface ICipher {
-  encrypt(input: string): string;
-  decrypt(input: string): string;
+type BaseCipher = { input: string };
+
+type CipherWithKey = BaseCipher & {
+  key: string;
+};
+
+type CipherWithShift = BaseCipher & {
+  shift: number;
+};
+
+type Cipher<Type> = Type extends CipherType.ATBASH | CipherType.SCYTALE
+  ? BaseCipher
+  : Type extends CipherType.CEASAR
+  ? CipherWithShift
+  : CipherWithKey;
+
+interface ICipher<T extends CipherType> {
+  encrypt(arg: Cipher<T>): string;
+  decrypt(arg: Cipher<T>): string;
 }
 
-export type { Color, Cipher, Translation, Hint, ICipher };
+export type {
+  Color,
+  Cipher,
+  Translation,
+  Hint,
+  ICipher,
+  BaseCipher,
+  CipherWithKey,
+  CipherWithShift,
+};
+export { CipherType };
