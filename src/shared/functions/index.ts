@@ -2,6 +2,7 @@ import atbash from './crypto/atbash';
 import ceasar from './crypto/ceasar';
 import Cipher from './crypto/cipher';
 import scytale from './crypto/scytale';
+import vernam from './crypto/vernam';
 import vigenere from './crypto/vigenere';
 import getRandomIntInclusive from './getRandomIntInclusive';
 import lenghtNotEqual from './lenghtNotEqual';
@@ -18,4 +19,5 @@ export {
   scytale,
   ceasar,
   vigenere,
+  vernam,
 };
