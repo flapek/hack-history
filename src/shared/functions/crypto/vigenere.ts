@@ -11,10 +11,10 @@ function encrypt(arg: Cipher<CipherType.VIGENERE>): string {
     password = alignmentList(password, input.length);
 
   var table = createTable(key);
-
-  return intsToCharList(
-    input.map((_, idx) => table[table[0].indexOf(password[idx])][table[0].indexOf(input[idx])]),
-  ).join('');
+  var a = input.map(
+    (_, idx) => table[table[0].indexOf(password[idx])][table[0].indexOf(input[idx])],
+  );
+  return intsToCharList(a).join('');
 }
 
 function decrypt(arg: Cipher<CipherType.VIGENERE>) {

@@ -1,39 +1,68 @@
-import { Container, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+  TextField,
+  Typography,
+} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { HintPanel, HistoryPanel } from '.';
-import { Hint } from '../types';
+import { HintPanel, HistoryPanel, StyledItem } from '.';
+import { CipherType, Hint } from '../types';
+import { useAppSelector } from '../../app';
+import { RootState } from '../../app/types';
+import { useSnackbar } from 'notistack';
+import { getUsername } from '../../features/user/userSlice';
+import { Cipher } from '../functions';
 
 export default function BaseGameScreen({
-  hints = [],
+  cipherType,
+  getHints,
   history = '',
   children,
 }: {
-  hints?: Hint[];
+  cipherType: CipherType;
+  getHints: (state: RootState) => Hint[];
   history?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
+  const username = useAppSelector(getUsername);
+  let hints = useAppSelector(getHints);
+  let decryptedUsername = Cipher.encrypt(cipherType, username);
   let browserHistory = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
+  const [input, setInput] = useState('');
   const [open, setOpen] = useState(false);
   const [openHintPanel, setOpenHintPanel] = useState(false);
   const [openHistoryPanel, setOpenHistoryPanel] = useState(false);
 
   const handleOpen = () => setOpen(!open);
 
-  const handleHintPanel = () => {
-    setOpenHintPanel(!openHintPanel);
+  const handleHintPanel = () => setOpenHintPanel(!openHintPanel);
+
+  const handleHistoryPanel = () => setOpenHistoryPanel(!openHistoryPanel);
+
+  const handleClick = () => {
+    input.trim().toLocaleLowerCase() === username
+      ? enqueueSnackbar('This is a success message!', {
+          variant: 'success',
+        })
+      : enqueueSnackbar('This is a error message!', {
+          variant: 'error',
+        });
   };
 
-  const handleHistoryPanel = () => {
-    setOpenHistoryPanel(!openHistoryPanel);
-  };
+  const redirect = () => browserHistory.goBack();
 
-  const redirect = () => {
-    browserHistory.goBack();
-  };
+  function onChange(e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    setInput(e.currentTarget.value);
+  }
 
   const actions = [
     {
@@ -61,7 +90,19 @@ export default function BaseGameScreen({
 
   return (
     <Container maxWidth={false}>
-      {children}
+      <Box sx={{ flexGrow: 1 }}>
+        <StyledItem>
+          <Typography variant="h4">Decrypt the encoded text</Typography>
+        </StyledItem>
+        <StyledItem>
+          <Typography>{decryptedUsername}</Typography>
+          <TextField size="small" onChange={onChange} />
+          <Button onClick={handleClick} variant="outlined">
+            Check
+          </Button>
+        </StyledItem>
+        {children}
+      </Box>
       <SpeedDial
         ariaLabel="Game helper"
         sx={{ position: 'fixed', bottom: 16, right: 16 }}

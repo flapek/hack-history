@@ -11,7 +11,7 @@ export default class Cipher {
       case 'CEASAR':
         return ceasar.encrypt({ input: input, shift: 10 });
       case 'VIGENERE':
-        return vigenere.encrypt({ input: input, key: '', password: '' });
+        return vigenere.encrypt({ input: input, key: '', password: 'secret' });
       case 'JEFFERSON':
         return 'not implemented yet';
       case 'VERNAM':
@@ -30,7 +30,7 @@ export default class Cipher {
       case 'CEASAR':
         return ceasar.decrypt({ input: input, shift: 10 });
       case 'VIGENERE':
-        return vigenere.decrypt({ input: input, key: '', password: '' });
+        return vigenere.decrypt({ input: input, key: '', password: 'secret' });
       case 'JEFFERSON':
         return 'not implemented yet';
       case 'VERNAM':
