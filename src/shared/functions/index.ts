@@ -1,6 +1,7 @@
 import atbash from './crypto/atbash';
 import ceasar from './crypto/ceasar';
 import Cipher from './crypto/cipher';
+import jefferson from './crypto/jefferson';
 import scytale from './crypto/scytale';
 import vernam from './crypto/vernam';
 import vigenere from './crypto/vigenere';
@@ -20,4 +21,5 @@ export {
   ceasar,
   vigenere,
   vernam,
+  jefferson,
 };

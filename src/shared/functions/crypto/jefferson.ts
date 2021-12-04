@@ -1,25 +1,63 @@
-import { ALPHABET_FIRST_HALf, ALPHABET_SECOND_HALf } from '../../const';
 import { Cipher, CipherType, ICipher } from '../../types';
 
-function encryptAndDecrypt(input: string): string {
-  let output = '';
-  const alphabetFirstHalf = ALPHABET_FIRST_HALf.split('');
-  const alphabetSecondHalf = ALPHABET_SECOND_HALf.split('').reverse();
-  for (let char of input) {
-    if (alphabetFirstHalf.includes(char))
-      output += alphabetSecondHalf[alphabetFirstHalf.indexOf(char)];
-    else output += alphabetFirstHalf[alphabetSecondHalf.indexOf(char)];
-  }
+const ALPHABET = [
+  'abceigdjfvuymhtqkzolrxspwn',
+  'acdehfijktlmouvygznpqxrwsb',
+  'adkomjubgephsczinxfyqrtvwl',
+  'aedcbifgjhlkmruoqvptnwyxzs',
+  'afnqukdopitjbrhcyslwemzvxg',
+  'agpocixlurndyzhwbjsqfkvmet',
+  'ahxjezbnikpvrogsydulcfmqtw',
+  'aihpjobwkcvfzlqerynsumgtdx',
+  'ajdskqoivtzefhgyunlpmbxwcr',
+  'akelbdfjghonmtprqsvzuxywic',
+  'altmsxvqpnohuwdizycgkrfbej',
+  'amnflhqgcujtbypzkxisrdvewo',
+  'ancjildhbmkgxuztswqyvorpfe',
+  'aodwpkjviuqhzctxblegnyrsmf',
+  'apbvhiyksguentcxowfqdrljzm',
+  'aqjnubtgimwzrvlxcshdeokfpy',
+  'armyoftheuszjxdpcwgqibklnv',
+  'asdmcneqbozplgvjrkytfuiwxh',
+  'atojylfxngwhvcmirbsekupdzq',
+  'autrzxqlyiovbpesnhjwmdgfck',
+  'avnkhrgoxeybfsjmudqclzwtip',
+  'awvsfdliebhknrjqzgmxpucoty',
+  'axkwrevdtufoyhmlsiqnjcpgbz',
+  'ayjpxmvkbqwuglostechnzfrid',
+  'azdnbuhyfwjlvgrcqmpsoextki',
+];
 
-  return output;
+function encrypt(input: string): string {
+  return input
+    .split('')
+    .map((i, idx) => {
+      if (i === ' ') return i;
+      const index = idx % ALPHABET.length;
+      return ALPHABET[index][(ALPHABET[index].indexOf(i) + 1) % ALPHABET[index].length];
+    })
+    .join('');
+}
+
+function decrypt(input: string): string {
+  return input
+    .split('')
+    .map((i, idx) => {
+      if (i === ' ') return i;
+      const index = idx % ALPHABET.length;
+      let letterIdx = ALPHABET[index].indexOf(i) - 1;
+      letterIdx = letterIdx === -1 ? ALPHABET[index].length - 1 : letterIdx;
+      return ALPHABET[index][letterIdx];
+    })
+    .join('');
 }
 
 const jefferson: ICipher<CipherType.JEFFERSON> = {
   encrypt: function (arg: Cipher<CipherType.JEFFERSON>): string {
-    return encryptAndDecrypt(arg.input);
+    return encrypt(arg.input);
   },
   decrypt: function (arg: Cipher<CipherType.JEFFERSON>): string {
-    return encryptAndDecrypt(arg.input);
+    return decrypt(arg.input);
   },
 };
 

@@ -38,7 +38,7 @@ type CipherWithShift = BaseCipher & {
   shift: number;
 };
 
-type Cipher<Type> = Type extends CipherType.ATBASH | CipherType.SCYTALE
+type Cipher<Type> = Type extends CipherType.ATBASH | CipherType.SCYTALE | CipherType.JEFFERSON
   ? BaseCipher
   : Type extends CipherType.CEASAR
   ? CipherWithShift
