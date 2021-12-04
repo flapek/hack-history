@@ -1,4 +1,4 @@
-import { atbash, ceasar, scytale, vigenere, vernam } from '..';
+import { atbash, ceasar, scytale, vigenere, vernam, jefferson } from '..';
 import { CipherType } from '../../types';
 
 export default class Cipher {
@@ -13,7 +13,7 @@ export default class Cipher {
       case 'VIGENERE':
         return vigenere.encrypt({ input: input, key: '', password: 'secret' });
       case 'JEFFERSON':
-        return 'not implemented yet';
+        return jefferson.encrypt({ input: input });
       case 'VERNAM':
         return vernam.encrypt({ input: input, key: 'secret' });
       default:
@@ -32,7 +32,7 @@ export default class Cipher {
       case 'VIGENERE':
         return vigenere.decrypt({ input: input, key: '', password: 'secret' });
       case 'JEFFERSON':
-        return 'not implemented yet';
+        return jefferson.decrypt({ input: input });
       case 'VERNAM':
         return vernam.decrypt({ input: input, key: 'secret' });
       default:
