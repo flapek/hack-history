@@ -29,7 +29,7 @@ export default function GameTimeline() {
             <TimelineDot color={generateNext()} />
             <TimelineConnector />
           </TimelineSeparator>
-          <TimelineContent sx={{ py: '12px', px: 2 }}>
+          <TimelineContent sx={{ py: 3, px: 2 }}>
             <Link to={timeline.pathTo}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
