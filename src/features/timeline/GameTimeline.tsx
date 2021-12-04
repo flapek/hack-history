@@ -4,10 +4,9 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import { Card, Typography, CardActionArea, CardMedia, CardContent } from '@mui/material';
+import { Card, Typography, CardActionArea, CardMedia, CardContent, Link } from '@mui/material';
 import { TimelineOppositeContent } from '@mui/lab';
 import timelines from './timelines';
-import { Link } from 'react-router-dom';
 import { useRandomColor } from '../../hooks';
 
 export default function GameTimeline() {
@@ -29,9 +28,9 @@ export default function GameTimeline() {
             <TimelineDot color={generateNext()} />
             <TimelineConnector />
           </TimelineSeparator>
-          <TimelineContent sx={{ py: 3, px: 2 }}>
-            <Link to={timeline.pathTo}>
-              <Card sx={{ maxWidth: 345 }}>
+          <TimelineContent sx={{ py: 3, px: 2, margin: 0 }}>
+            <Link href={timeline.pathTo}>
+              <Card>
                 <CardActionArea>
                   <CardMedia
                     component="img"
