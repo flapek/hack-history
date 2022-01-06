@@ -5,11 +5,13 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Link,
   Tab,
   Tabs,
   Typography,
 } from '@mui/material';
 import React, { SyntheticEvent, useState } from 'react';
+import { isLink } from '../functions';
 import { Hint } from '../types';
 
 function a11yProps(index: number) {
@@ -20,13 +22,13 @@ function a11yProps(index: number) {
 }
 
 interface TabPanelProps {
-  children?: React.ReactNode;
+  hint: string;
   index: number;
   value: number;
 }
 
 function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+  const { hint, value, index, ...other } = props;
   return (
     <div
       role="tabpanel"
@@ -36,7 +38,13 @@ function TabPanel(props: TabPanelProps) {
       {...other}>
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          {isLink(hint) ? (
+            <Link href={hint}>
+              <Typography>{hint}</Typography>
+            </Link>
+          ) : (
+            <Typography>{hint}</Typography>
+          )}
         </Box>
       )}
     </div>
@@ -74,9 +82,7 @@ export default function HintPanel({
           </Tabs>
         </Box>
         {hints.map((hint, index) => (
-          <TabPanel value={value} index={index}>
-            {hint.description}
-          </TabPanel>
+          <TabPanel value={value} index={index} hint={hint.description}></TabPanel>
         ))}
       </DialogContent>
       <DialogActions>

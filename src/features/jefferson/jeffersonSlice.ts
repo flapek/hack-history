@@ -4,7 +4,10 @@ import { Hint } from '../../shared/types';
 import { JeffersonState } from './types';
 
 const initialState: JeffersonState = {
-  hints: [],
+  hints: [
+    { description: 'Used alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ.' },
+    { description: 'https://en.fasoo.com/jefferson-wheel-cipher-and-modern-cryptography/' },
+  ],
 };
 
 export const jeffersonSlice = createSlice({

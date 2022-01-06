@@ -9,7 +9,7 @@ export default class Cipher {
       case 'SCYTALE':
         return scytale.encrypt({ input: input });
       case 'CEASAR':
-        return ceasar.encrypt({ input: input, shift: 10 });
+        return ceasar.encrypt({ input: input, shift: input.length });
       case 'VIGENERE':
         return vigenere.encrypt({ input: input, key: '', password: 'secret' });
       case 'JEFFERSON':
@@ -28,7 +28,7 @@ export default class Cipher {
       case 'SCYTALE':
         return scytale.decrypt({ input: input });
       case 'CEASAR':
-        return ceasar.decrypt({ input: input, shift: 10 });
+        return ceasar.decrypt({ input: input, shift: input.length });
       case 'VIGENERE':
         return vigenere.decrypt({ input: input, key: '', password: 'secret' });
       case 'JEFFERSON':

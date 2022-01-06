@@ -6,6 +6,7 @@ import scytale from './crypto/scytale';
 import vernam from './crypto/vernam';
 import vigenere from './crypto/vigenere';
 import getRandomIntInclusive from './getRandomIntInclusive';
+import isLink from './isLink';
 import lenghtNotEqual from './lenghtNotEqual';
 import randomColor from './randomColor';
 import stringToASCIICode from './stringToASCIICode';
@@ -22,4 +23,5 @@ export {
   vigenere,
   vernam,
   jefferson,
+  isLink
 };
